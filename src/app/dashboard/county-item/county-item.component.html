@@ -1,0 +1,31 @@
+<a
+        style="cursor: pointer;"
+        [routerLink]="[countyName]"
+        routerLinkActive="active"
+        class="list-group-item clearfix">
+    <div class="card card-stats">
+        <div class="card-header  card-header-warning card-header-icon">
+            <div class="card-icon">
+                {{ country.country }}
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="card-title" [innerHTML]="country.summary"></div>
+        </div>
+    </div>
+    <!--    <div class="pull-left">-->
+    <!--        <h4 class="list-group-item-heading">{{ country.country }}</h4>-->
+    <!--        <p class="list-group-item-text">{{ country.news }}</p>-->
+    <!--    </div>-->
+    <!--    <span class="pull-right">-->
+    <!--        <img-->
+    <!--                [src]="country.imagePath"-->
+    <!--                alt="{{ country.name }}"-->
+    <!--                class="img-responsive"-->
+    <!--                style="max-height: 50px;">-->
+    <!--      </span>-->
+</a>
+
+
+
+

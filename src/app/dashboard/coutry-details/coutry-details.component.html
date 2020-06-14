@@ -1,0 +1,19 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <h4 class="card-title"> {{ country.country }}</h4>
+                <p class="card-category"> {{ country.continent }}</p>
+            </div>
+            <div class="card-body">
+                <div id="typography">
+                    <div class="row card-text">
+                        <div class="tim-note" [innerHTML]="country.news">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

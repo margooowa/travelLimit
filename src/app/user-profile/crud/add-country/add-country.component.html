@@ -1,0 +1,62 @@
+<div class="main-content">
+
+    <div class="container-fluid">
+        <!-- Title group  -->
+        <div class="title-group">
+            <h1 class="mat-h1">Add country</h1>
+            <mat-divider fxFlex="1 0"></mat-divider>
+        </div>
+
+        <!-- Book form -->
+        <div class="inner-wrapper">
+            <form [formGroup]="countryForm" (ngSubmit)="submitBook()" #resetBookForm="ngForm" novalidate>
+                <!-- Left block -->
+                <mat-card>
+                    <div class="controlers-wrapper">
+                        <!-- Country name -->
+                        <div class="row">
+                            <div class="col-md-5">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Country name" formControlName="country">
+                                    <!--                            <mat-error *ngIf="handleError('country', 'required')">-->
+                                    <!--                                You must provide a <strong>country name</strong>-->
+                                    <!--                            </mat-error>-->
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-5">
+                                <mat-form-field>
+                                    <mat-label>Choose a continent</mat-label>
+                                    <mat-select formControlName="continent">
+                                        <mat-option value="Europe">Европа</mat-option>
+                                        <mat-option value="Asia">Азия</mat-option>
+                                        <mat-option value="Africa">Африка</mat-option>
+                                    </mat-select>
+                                    <!--                            <mat-error *ngIf="handleError('continent', 'required')">-->
+                                    <!--                                You must provide a <strong>continent</strong>-->
+                                    <!--                            </mat-error>-->
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <editor formControlName="summary" initialValue="Общая краткая информация"></editor>
+
+                        <editor formControlName="news" initialValue="Полная информация"></editor>
+
+                    </div>
+                </mat-card>
+
+
+                <!-- Submit & Reset -->
+                <mat-card>
+                    <div class="full-wrapper button-wrapper">
+                        <div class="button-wrapper">
+                            <button mat-flat-button color="warn">Submit</button>
+                            <button mat-flat-button color="war" (click)="resetForm()">Clear</button>
+                        </div>
+                    </div>
+                </mat-card>
+            </form>
+        </div>
+    </div>
+</div>

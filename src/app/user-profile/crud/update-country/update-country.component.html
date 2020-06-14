@@ -1,0 +1,131 @@
+<div class="main-content">
+
+    <div class="container-fluid">
+        <!-- Title group  -->
+        <div class="title-group">
+            <h1 class="mat-h1">Edit Book</h1>
+            <mat-divider fxFlex="1 0"></mat-divider>
+        </div>
+
+        <!-- Book form -->
+        <div class="inner-wrapper">
+            <form [formGroup]="editBookForm" (ngSubmit)="updateBook()" novalidate>
+                <mat-card>
+                    <div class="controlers-wrapper">
+                        <!-- Book name -->
+                        <div class="row">
+                            <div class="col-md-5">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Country" formControlName="country">
+                                    <!--                            <mat-error *ngIf="handleError('country', 'required')">-->
+                                    <!--                                You must provide a<strong>country</strong>-->
+                                    <!--                            </mat-error>-->
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-5">
+                                <mat-select formControlName="continent">
+                                    <mat-option value="Europe">Европа</mat-option>
+                                    <mat-option value="Asia">Азия</mat-option>
+                                    <mat-option value="Africa">Африка</mat-option>
+                                </mat-select>
+                            </div>
+                        </div>
+
+                        <!--                        <mat-form-field class="example-full-width">-->
+                        <!--                            <input matInput placeholder="News" formControlName="news">-->
+                        <!--                            &lt;!&ndash;                            <mat-error *ngIf="handleError('news', 'required')">&ndash;&gt;-->
+                        <!--                            &lt;!&ndash;                                You must provide a<strong>news</strong>&ndash;&gt;-->
+                        <!--                            &lt;!&ndash;                            </mat-error>&ndash;&gt;-->
+                        <!--                        </mat-form-field>-->
+
+                        <!--                        <mat-form-field class="example-full-width">-->
+                        <!--                            <input matInput placeholder="Summary" formControlName="summary">-->
+                        <!--                            &lt;!&ndash;                            <mat-error *ngIf="handleError('summary', 'required')">&ndash;&gt;-->
+                        <!--                            &lt;!&ndash;                                You must provide a<strong>summary</strong>&ndash;&gt;-->
+                        <!--                            &lt;!&ndash;                            </mat-error>&ndash;&gt;-->
+                        <!--                        </mat-form-field>-->
+
+                        <editor formControlName="summary" [init]="{plugins: 'link'}"></editor>
+
+                        <editor formControlName="news" [init]="{plugins: 'link'}"></editor>
+
+                        <!--                            <ejs-richtexteditor formControlName="news"></ejs-richtexteditor>-->
+                        <!--                        </mat-form-field>-->
+
+
+                        <!--                        &lt;!&ndash; ISBN &ndash;&gt;-->
+                        <!--                        <mat-form-field class="example-full-width">-->
+                        <!--                            <input matInput placeholder="ISBN-10" formControlName="isbn_10" pattern="[0-9]*"-->
+                        <!--                                   minlength="10"-->
+                        <!--                                   maxlength="10">-->
+                        <!--                            <mat-error *ngIf="handleError('isbn_10', 'required')">-->
+                        <!--                                You must provide a <strong>10 digit ISBN</strong>-->
+                        <!--                            </mat-error>-->
+                        <!--                            <mat-error *ngIf="handleError('isbn_10', 'pattern')">-->
+                        <!--                                Only numbers are allowed-->
+                        <!--                            </mat-error>-->
+                        <!--                            <mat-error *ngIf="handleError('isbn_10', 'minlength')">-->
+                        <!--                                Your <strong>ISBN</strong> must be 10 digit-->
+                        <!--                            </mat-error>-->
+                        <!--                        </mat-form-field>-->
+
+                        <!--                        &lt;!&ndash; Author name &ndash;&gt;-->
+                        <!--                        <mat-form-field class="example-full-width">-->
+                        <!--                            <input matInput placeholder="Author name" formControlName="author_name">-->
+                        <!--                            <mat-error *ngIf="handleError('author_name', 'required')">-->
+                        <!--                                You must provide an <strong>author name</strong>-->
+                        <!--                            </mat-error>-->
+                        <!--                        </mat-form-field>-->
+
+                        <!--                        &lt;!&ndash; Publication date &ndash;&gt;-->
+                        <!--                        <mat-form-field>-->
+                        <!--                            <input matInput readonly [matDatepicker]="picker" placeholder="Publication date"-->
+                        <!--                                   formControlName="publication_date" (dateChange)="formatDate($event)">-->
+                        <!--                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+                        <!--                            <mat-datepicker #picker></mat-datepicker>-->
+                        <!--                            <mat-error *ngIf="handleError('publication_date', 'required')">-->
+                        <!--                                Publication date is required-->
+                        <!--                            </mat-error>-->
+                        <!--                        </mat-form-field>-->
+                    </div>
+                </mat-card>
+
+                <mat-card>
+                    <div class="controlers-wrapper">
+                        <!-- Book binding -->
+                        <!--                        <mat-form-field>-->
+                        <!--                            <mat-label>Binding type</mat-label>-->
+                        <!--                                                <mat-select [(value)]="selected" formControlName="binding_type">-->
+                        <!--                                                    <mat-option [value]="bindingType" *ngFor="let bindingType of BindingType">{{bindingType}}</mat-option>-->
+                        <!--                                                </mat-select>-->
+                        <!--                            <mat-error *ngIf="handleError('binding_type', 'required')">-->
+                        <!--                                Binding type is required-->
+                        <!--                            </mat-error>-->
+                        <!--                        </mat-form-field>-->
+
+                        <!--                        &lt;!&ndash; Book stock &ndash;&gt;-->
+                        <!--                        <div class="misc-bottom-padding">-->
+                        <!--                            <mat-label>Available in stock:</mat-label>-->
+                        <!--                            <mat-radio-group aria-label="Select an option" formControlName="in_stock">-->
+                        <!--                                <mat-radio-button value="Yes">Yes</mat-radio-button>-->
+                        <!--                                <mat-radio-button value="No">No</mat-radio-button>-->
+                        <!--                            </mat-radio-group>-->
+                        <!--                        </div>-->
+
+                    </div>
+                </mat-card>
+
+                <!-- Submit & Reset -->
+                <mat-card>
+                    <div class="full-wrapper button-wrapper">
+                        <div class="button-wrapper">
+                            <button mat-flat-button color="warn">Update</button>
+                            <button mat-flat-button color="war" type="button" (click)="goBack()">Go Back</button>
+                        </div>
+                    </div>
+                </mat-card>
+            </form>
+        </div>
+    </div>
+</div>
