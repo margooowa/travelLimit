@@ -10,18 +10,16 @@ declare interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-    {path: '/dashboard', title: 'Все страны', icon: 'dashboard', class: ''},
-    {path: '/dashboard/continent/Europe', title: 'Европа', icon: 'dashboard', class: ''},
-    {path: '/dashboard/continent/Asia', title: 'Азия', icon: 'dashboard', class: ''},
-    {path: '/dashboard/continent/NorthAmerica', title: 'Северная Америка', icon: 'dashboard', class: ''},
-    {path: '/dashboard/continent/SouthAmerica', title: 'Южная Америка', icon: 'dashboard', class: ''},
-    {path: '/dashboard/continent/Africa', title: 'Африка', icon: 'dashboard', class: ''},
-    {path: '/dashboard/continent/Australia', title: 'Австралия', icon: 'dashboard', class: ''},
-    {path: '/user-profile', title: 'User Profile', icon: 'person', class: ''},
-    {path: '/table-list', title: 'Table List', icon: 'content_paste', class: ''},
-    {path: '/typography', title: 'Typography', icon: 'library_books', class: ''},
-    {path: '/icons', title: 'Icons', icon: 'bubble_chart', class: ''},
-    {path: '/notifications', title: 'Notifications', icon: 'notifications', class: ''},
+    {path: '/dashboard', title: 'Все страны', icon: 'language', class: ''},
+    {path: '/dashboard/continent/Europe', title: 'Европa', icon: 'flight', class: ''},
+    {path: '/dashboard/continent/Asia', title: 'Азия', icon: 'flight', class: ''},
+    {path: '/dashboard/continent/NorthAmerica', title: 'Северная Америка', icon: 'flight', class: ''},
+    {path: '/dashboard/continent/SouthAmerica', title: 'Южная Америка', icon: 'flight', class: ''},
+    {path: '/dashboard/continent/Africa', title: 'Африка', icon: 'flight', class: ''},
+    {path: '/dashboard/continent/Australia', title: 'Австралия', icon: 'flight', class: ''},
+    // {path: '/user-profile', title: 'User Profile', icon: 'person', class: ''},
+    // {path: '/typography', title: 'Typography', icon: 'library_books', class: ''},
+    // {path: '/notifications', title: 'Notifications', icon: 'notifications', class: ''},
 ];
 
 @Component({

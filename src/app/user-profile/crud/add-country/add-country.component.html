@@ -39,9 +39,28 @@
                             </div>
                         </div>
 
-                        <editor formControlName="summary" initialValue="Общая краткая информация"></editor>
-
-                        <editor formControlName="news" initialValue="Полная информация"></editor>
+                        <h5>Краткая информация(summary)</h5>
+                        <editor formControlName="summary" initialValue="Общая краткая информация" [init]="{
+                                height: 300,
+                                plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                        ],
+                        toolbar:
+                        'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify |
+                        bullist numlist outdent indent | removeformat | help'}"></editor>
+                        <h5>Полная информация(news)</h5>
+                        <editor formControlName="news" initialValue="Полная информация" initialValue="Общая краткая информация" [init]="{
+                                height: 500,
+                                plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                        ],
+                        toolbar:
+                        'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify |
+                        bullist numlist outdent indent | removeformat | help'}"></editor>
 
                     </div>
                 </mat-card>

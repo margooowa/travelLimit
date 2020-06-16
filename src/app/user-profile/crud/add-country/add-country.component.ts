@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LimitService} from '../../../dashboard/limit.service';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-add-country',
@@ -26,7 +27,8 @@ export class AddCountryComponent implements OnInit {
 
     constructor(
         public fb: FormBuilder,
-        private limitService: LimitService
+        private limitService: LimitService,
+        private router: Router
     ) {
     }
 
@@ -68,6 +70,7 @@ export class AddCountryComponent implements OnInit {
         if (this.countryForm.valid) {
             this.limitService.addLimit(this.countryForm.value)
             this.resetForm();
+            this.router.navigate(['/user-profile/list']);
         }
     }
 

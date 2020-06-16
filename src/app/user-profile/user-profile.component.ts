@@ -17,8 +17,8 @@ export class UserProfileComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private route: ActivatedRoute,
-        private router: Router,
-        private auth: AuthService
+        public router: Router,
+        public auth: AuthService
     ) {
     }
 
@@ -44,6 +44,7 @@ export class UserProfileComponent implements OnInit {
                 const password = this.form.get('password').value;
                 await this.auth.SignIn(username, password);
             } catch (err) {
+                console.log(err)
                 this.loginInvalid = true;
             }
         } else {

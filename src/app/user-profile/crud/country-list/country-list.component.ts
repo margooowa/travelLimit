@@ -18,7 +18,6 @@ export class CountryListComponent implements OnInit {
         '$id',
         'country',
         'continent',
-        'in_stock',
         'action'
     ];
 
@@ -52,15 +51,15 @@ export class CountryListComponent implements OnInit {
             )
 
     /* Delete */
-    deleteBook(index
-                   :
-                   number, e
-    ) {
-        if (window.confirm('Are you sure?')) {
-            const data = this.dataSourceLimit.data;
-            data.splice((this.paginator.pageIndex * this.paginator.pageSize) + index, 1);
-            this.dataSourceLimit.data = data;
-            // this.limitService.DeleteBook(e.$key)
-        }
-    }
+    // deleteBook(index
+    //                :
+    //                number, e
+    // ) {
+    //     if (window.confirm('Are you sure?')) {
+    //         const data = this.dataSourceLimit.data;
+    //         data.splice((this.paginator.pageIndex * this.paginator.pageSize) + index, 1);
+    //         this.dataSourceLimit.data = data;
+    //         // this.limitService.DeleteBook(e.$key)
+    //     }
+    // }
 }

@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <!-- Title group  -->
         <div class="title-group">
-            <h1 class="mat-h1">Edit Book</h1>
+            <h1 class="mat-h1">Edit Country</h1>
             <mat-divider fxFlex="1 0"></mat-divider>
         </div>
 
@@ -46,10 +46,28 @@
                         <!--                            &lt;!&ndash;                            </mat-error>&ndash;&gt;-->
                         <!--                        </mat-form-field>-->
 
-                        <editor formControlName="summary" [init]="{plugins: 'link'}"></editor>
-
-                        <editor formControlName="news" [init]="{plugins: 'link'}"></editor>
-
+                        <h5>Краткая информация(summary)</h5>
+                        <editor formControlName="summary" initialValue="Общая краткая информация" [init]="{
+                                height: 300,
+                                plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                        ],
+                        toolbar:
+                        'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify |
+                        bullist numlist outdent indent | removeformat | help'}"></editor>
+                        <h5>Полная информация(news)</h5>
+                        <editor formControlName="news" initialValue="Полная информация" initialValue="Общая краткая информация" [init]="{
+                                height: 500,
+                                plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste code help wordcount'
+                        ],
+                        toolbar:
+                        'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify |
+                        bullist numlist outdent indent | removeformat | help'}"></editor>
                         <!--                            <ejs-richtexteditor formControlName="news"></ejs-richtexteditor>-->
                         <!--                        </mat-form-field>-->
 

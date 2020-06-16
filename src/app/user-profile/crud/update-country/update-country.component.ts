@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
 import {LimitService} from '../../../dashboard/limit.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatChipInputEvent} from '@angular/material/chips';
 import {Limit} from '../../../dashboard/limits.model';
 
 @Component({
@@ -26,7 +26,8 @@ export class UpdateCountryComponent implements OnInit {
     constructor(public fb: FormBuilder,
                 private limitService: LimitService,
                 private actRoute: ActivatedRoute,
-                private router: Router) {
+                private router: Router,
+                private location: Location) {
     }
 
     ngOnInit() {
@@ -34,12 +35,10 @@ export class UpdateCountryComponent implements OnInit {
             .subscribe(
                 (params: Params) => {
                     this.getLimitsById(params.country);
-
-                    // this.country = this.getLimitsByCountryName(this.countyName);
                 }
             );
 
-        // this.updateBookForm();
+        this.updateBookForm();
     }
 
     getLimitsById = (county: string) =>
@@ -47,9 +46,6 @@ export class UpdateCountryComponent implements OnInit {
             .getLimitsByCountryName(county)
             .subscribe(res => {
                 this.country = res[0]
-                console.log('country!!', this.country)
-                // this.editBookForm.setValue(this.country);
-                console.log('country!! set', this.country)
                 this.news = this.country.news
 
                 this.editBookForm = new FormGroup({
@@ -62,18 +58,14 @@ export class UpdateCountryComponent implements OnInit {
 
 
     // /* Update form */
-    // updateBookForm() {
-    //     this.editBookForm = this.fb.group({
-    //         country: ['', [Validators.required]],
-    //         continent: ['', [Validators.required]],
-    //         // isbn_10: ['', [Validators.required]],
-    //         // author_name: ['', [Validators.required]],
-    //         // publication_date: ['', [Validators.required]],
-    //         // binding_type: ['', [Validators.required]],
-    //         // in_stock: ['Yes'],
-    //         // languages: ['']
-    //     })
-    // }
+    updateBookForm() {
+        this.editBookForm = this.fb.group({
+            country: ['', [Validators.required]],
+            continent: ['', [Validators.required]],
+            news: new FormControl('', Validators.required),
+            summary: new FormControl('', Validators.required)
+        })
+    }
 
 
 
@@ -94,7 +86,7 @@ export class UpdateCountryComponent implements OnInit {
 
     /* Go to previous page */
     goBack() {
-        // this.location.back();
+        this.location.back();
     }
 
     /* Submit book */
@@ -102,7 +94,7 @@ export class UpdateCountryComponent implements OnInit {
     updateBook() {
         if (window.confirm('Are you sure you wanna update?')) {
             this.limitService.updateLimit(this.country.$id, this.editBookForm.value);
-            this.router.navigate(['country-list']);
+            this.router.navigate(['/user-profile/list']);
         }
     }
 

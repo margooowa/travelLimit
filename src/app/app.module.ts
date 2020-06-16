@@ -11,7 +11,6 @@ import {ComponentsModule} from './components/components.module';
 import {AppComponent} from './app.component';
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 import {LimitService} from './dashboard/limit.service';
-import {SecretComponent} from './user-profile/secret/secret.component';
 import {AngularMaterialModule} from './layouts/admin-layout/material.module';
 
 @NgModule({
@@ -28,7 +27,6 @@ import {AngularMaterialModule} from './layouts/admin-layout/material.module';
     declarations: [
         AppComponent,
         AdminLayoutComponent,
-        SecretComponent
 
     ],
     providers: [LimitService],

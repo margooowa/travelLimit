@@ -8,9 +8,6 @@ import {AuthService} from '../user-profile/auth.service';
 
 @Injectable()
 export class LimitService {
-    // recipesChanged = new Subject<Recipe[]>();
-    //
-    private countries: Limit[] = [];
 
     constructor(private firestore: AngularFirestore,
                 private authService: AuthService
@@ -18,27 +15,16 @@ export class LimitService {
     }
 
 
-    setCountries(countries: Limit[]) {
-        this.countries = countries;
-    }
-
-    create_Limit(record) {
-        return this.firestore.collection('Students').add(record);
-    }
-
-
     updateLimit(recordID, record) {
+        record.time = new Date().toString();
+        record.userId = this.authService.getEmail();
         this.firestore.collection('limits').doc(recordID).update(record);
     }
 
     addLimit(record: Limit) {
         record.time = new Date().toString();
-        record.userId = this.authService.user.email;
+        record.userId = this.authService.getEmail();
         this.firestore.collection('limits').add(record);
-    }
-
-    delete_Student(record_id) {
-        this.firestore.doc('Students/' + record_id).delete();
     }
 
 
@@ -56,23 +42,20 @@ export class LimitService {
             .pipe(map(actions => actions.map(this.documentToDomainObject)));
     }
 
-    getLimitsById(id: string) {
-        // return Observable.create(subscriber ->
-        //     firestore.collection(limits).document(uid)
-        //         .get().addOnSuccessListener(documentSnapshot -> {
-        //         subscriber.onNext(documentSnapshot.toObject(User.class));
-        //     })
-        //         .addOnFailureListener(subscriber::onError));
-        // return this.firestore.collection('limits', ref => ref.where(this.firestore.firestore.documentId(), '==', 'fK3ddutEpD2qQqRMXNW5')).snapshotChanges()
-        //     .pipe(map(actions => actions.map(this.documentToDomainObject)));
-        // console.log('id!! ', id)
-        const doc = this.firestore.collection('limits').doc('Ex689itaSOgxDzTiJzWN').snapshotChanges()
-            .pipe(map(this.documentToDomainObject));
-        console.log('doc!! ', doc)
-        //  const documentToDomainObject1 = this.documentToDomainObject(doc);
-        // console.log('documentToDomainObject1 ', documentToDomainObject1)
-        return doc
-    }
+    // getLimitsById(id: string) {
+    //     // return Observable.create(subscriber ->
+    //     //     firestore.collection(limits).document(uid)
+    //     //         .get().addOnSuccessListener(documentSnapshot -> {
+    //     //         subscriber.onNext(documentSnapshot.toObject(User.class));
+    //     //     })
+    //     //         .addOnFailureListener(subscriber::onError));
+    //     // return this.firestore.collection('limits', ref => ref.where(this.firestore.firestore.documentId(), '==', 'fK3ddutEpD2qQqRMXNW5')).snapshotChanges()
+    //     //     .pipe(map(actions => actions.map(this.documentToDomainObject)));
+    //     // console.log('id!! ', id)
+    //     const doc = this.firestore.collection('limits').doc('Ex689itaSOgxDzTiJzWN').snapshotChanges()
+    //         .pipe(map(this.documentToDomainObject));
+    //     return doc
+    // }
 
     getLimitsByCountryName(countryName: string) {
         return this.firestore.collection('limits', ref => ref.where('country',
@@ -82,7 +65,6 @@ export class LimitService {
 
     documentToDomainObject = _ => {
         const object = _.payload.doc.data();
-        console.log('!object')
         object.$id = _.payload.doc.id;
         return object;
     }

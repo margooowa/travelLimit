@@ -16,14 +16,14 @@ import {ActivatedRoute, Params} from '@angular/router';
 export class DashboardComponent implements OnInit {
 
     myControl = new FormControl();
-    options: string[] = ['Австрия', 'Албания'];
+    options: string[];
     filteredOptions: Observable<string[]>;
     public limits: Limit[];
     continent: string;
 
     @Output()
     optionSelected: EventEmitter<MatAutocompleteSelectedEvent>;
-    s
+
 
     constructor(private limitService: LimitService,
                 private route: ActivatedRoute) {
@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit {
 
 
     ngOnInit() {
+        console.log('init')
 
         this.route.params
             .subscribe(
@@ -41,26 +42,18 @@ export class DashboardComponent implements OnInit {
                     }
                 }
             );
-        this.filteredOptions = this.myControl.valueChanges
-            .pipe(
-                startWith(''),
-                map(value => this._filter(value))
-            )
 
 
-        console.log('this.continent', this.continent)
         if (this.continent == null) {
-            console.log('cont simple', this.continent)
             this.getLimits();
         } else {
-            console.log('cont', this.continent)
             this.getLimitsContinent(this.continent);
         }
         // this.limits.forEach((element) => {
         //     this.options.push(element.country)
         // });
 
-        this.options.push('TEST2');
+        // this.options.push('TEST2');
 
 
     }
@@ -69,44 +62,44 @@ export class DashboardComponent implements OnInit {
     getLimits = () =>
         this.limitService
             .getLimits()
-            .subscribe(res => (this.limits = res))
+            .subscribe(res => {
+                this.limits = res;
+                this.onGetLimits(this.limits)
+            })
 
     getLimitsContinent = (continent: string) =>
         this.limitService
             .getLimitsContinent(continent)
             .subscribe(res => {
                 this.limits = res;
-                // this.onGetLimits(res);
+                this.onGetLimits(this.limits)
             })
 
     // Auth Complete
-    // onGetLimits(data) {
-    //     console.log('data', data)
-    //     data.forEach((element) => {
-    //         this.options.push(element.country)
-    //     });
-    //     console.log('options', this.options)
-    //     this.filteredOptions = this.myControl.valueChanges
-    //         .pipe(
-    //             startWith(''),
-    //             map(value => value.length >= 1 ? this._filter(value) : [])
-    //         );
-    // }
+    onGetLimits(data) {
+        this.options = [];
+        if (this.options.length === 0) {
+            data.forEach((element) => {
+                this.options.push(element.country)
+            });
+            this.filteredOptions = this.myControl.valueChanges
+                .pipe(
+                    startWith(''),
+                    map(value => this._filter(value))
+                );
+        }
+
+    }
 
     private _filter(value: string): string[] {
         const filterValue = value.toLowerCase();
-        this.options.push('TEST3');
-
         return this.options.filter(option => option.toLowerCase().includes(filterValue));
     }
 
     onSelect(value: string) {
-        console.log(value);
         this.limits = this.limits.filter(
             county => county.country === value);
     }
 
-    // this.dataStorageService.fetchRecipesByCountry(value).subscribe();
-    // this.router.navigate(['new'], {relativeTo: this.route});
 }
 
