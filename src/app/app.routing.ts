@@ -9,6 +9,7 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
+import {HttpClientModule} from '@angular/common/http';
 
 const routes: Routes = [
     {
@@ -29,6 +30,7 @@ const routes: Routes = [
     imports: [
         CommonModule,
         BrowserModule,
+        HttpClientModule,
         MatAutocompleteModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
         AngularFirestoreModule,

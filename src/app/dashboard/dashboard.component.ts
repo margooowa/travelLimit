@@ -7,6 +7,7 @@ import {map, startWith} from 'rxjs/operators';
 import {LimitService} from './limit.service';
 import {Limit} from './limits.model';
 import {ActivatedRoute, Params} from '@angular/router';
+import {CountriesData} from 'countries-map';
 
 @Component({
     selector: 'app-dashboard',
@@ -20,6 +21,11 @@ export class DashboardComponent implements OnInit {
     filteredOptions: Observable<string[]>;
     public limits: Limit[];
     continent: string;
+    public mapData: CountriesData = {
+        'ES': { 'value': 416 },
+        'GB': { 'value': 94 },
+        'FR': { 'value': 255 }
+    };
 
     @Output()
     optionSelected: EventEmitter<MatAutocompleteSelectedEvent>;

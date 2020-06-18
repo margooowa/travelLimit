@@ -12,12 +12,16 @@ import {AppComponent} from './app.component';
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 import {LimitService} from './dashboard/limit.service';
 import {AngularMaterialModule} from './layouts/admin-layout/material.module';
+import { AboutUsComponent } from './about-us/about-us.component';
+import {CountriesMapModule} from 'countries-map';
 
 @NgModule({
     imports: [
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
+
+        CountriesMapModule,
         HttpModule,
         ComponentsModule,
         RouterModule,
@@ -27,6 +31,7 @@ import {AngularMaterialModule} from './layouts/admin-layout/material.module';
     declarations: [
         AppComponent,
         AdminLayoutComponent,
+        AboutUsComponent,
 
     ],
     providers: [LimitService],

@@ -10,6 +10,7 @@ import {CountryListComponent} from '../../user-profile/crud/country-list/country
 import {AddCountryComponent} from '../../user-profile/crud/add-country/add-country.component';
 import {UpdateCountryComponent} from '../../user-profile/crud/update-country/update-country.component';
 import {AuthGuard} from '../../user-profile/auth.guard';
+import {AboutUsComponent} from '../../about-us/about-us.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -88,4 +89,5 @@ export const AdminLayoutRoutes: Routes = [
     {path: 'typography', component: TypographyComponent},
     {path: 'notifications', component: NotificationsComponent},
     {path: 'upgrade', component: UpgradeComponent},
+    {path: 'aboutUs', component: AboutUsComponent},
 ];
