@@ -1,7 +1,6 @@
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 
 
@@ -14,6 +13,7 @@ import {LimitService} from './dashboard/limit.service';
 import {AngularMaterialModule} from './layouts/admin-layout/material.module';
 import { AboutUsComponent } from './about-us/about-us.component';
 import {CountriesMapModule} from 'countries-map';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -22,7 +22,7 @@ import {CountriesMapModule} from 'countries-map';
         ReactiveFormsModule,
 
         CountriesMapModule,
-        HttpModule,
+        HttpClientModule,
         ComponentsModule,
         RouterModule,
         AppRoutingModule,

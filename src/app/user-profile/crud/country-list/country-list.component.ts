@@ -26,7 +26,7 @@ export class CountryListComponent implements OnInit {
     }
 
     constructor(private limitService: LimitService) {
-
+        this.dataSourceLimit = new MatTableDataSource();
         // /* Data table */
         // this.dataSource = new MatTableDataSource(this.limits);
         // /* Pagination */

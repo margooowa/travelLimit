@@ -55,6 +55,7 @@ import {CountriesMapModule} from 'countries-map';
         MatDividerModule,
         MatAutocompleteModule,
         EditorModule,
+        CountriesMapModule,
         // AngularMaterialModule,
 
         CommonModule,
