@@ -3,33 +3,33 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {map} from 'rxjs/operators';
 import {Limit} from './limits.model';
-import {Observable} from 'rxjs';
 import {AuthService} from '../user-profile/auth.service';
+import {firestore} from 'firebase';
 
 @Injectable()
 export class LimitService {
 
-    constructor(private firestore: AngularFirestore,
+    constructor(private firestoreSer: AngularFirestore,
                 private authService: AuthService
     ) {
     }
 
 
-    updateLimit(recordID, record) {
-        record.time = new Date().toString();
+    updateLimit(recordID, record: Limit) {
+        record.time = firestore.Timestamp.now();
         record.userId = this.authService.getEmail();
-        this.firestore.collection('limits').doc(recordID).update(record);
+        this.firestoreSer.collection('limits').doc(recordID).update(record);
     }
 
     addLimit(record: Limit) {
-        record.time = new Date().toString();
+        record.time = firestore.Timestamp.now();
         record.userId = this.authService.getEmail();
-        this.firestore.collection('limits').add(record);
+        this.firestoreSer.collection('limits').add(record);
     }
 
 
     getLimits() {
-        return this.firestore.collection('limits').snapshotChanges()
+        return this.firestoreSer.collection('limits', ref => ref.orderBy('time', 'desc')).snapshotChanges()
             .pipe(map(actions => actions.map(this.documentToDomainObject)
                 // , tap(countries => {
                 // this.setCountries(countries);})
@@ -37,8 +37,8 @@ export class LimitService {
     }
 
     getLimitsContinent(continent: string) {
-        return this.firestore.collection('limits', ref => ref.where('continent',
-            '==', continent)).snapshotChanges()
+        return this.firestoreSer.collection('limits', ref => ref.where('continent',
+            '==', continent).orderBy('time', 'desc')).snapshotChanges()
             .pipe(map(actions => actions.map(this.documentToDomainObject)));
     }
 
@@ -58,7 +58,7 @@ export class LimitService {
     // }
 
     getLimitsByCountryName(countryName: string) {
-        return this.firestore.collection('limits', ref => ref.where('country',
+        return this.firestoreSer.collection('limits', ref => ref.where('country',
             '==', countryName)).snapshotChanges()
             .pipe(map(actions => actions.map(this.documentToDomainObject)));
     }
@@ -66,6 +66,7 @@ export class LimitService {
     documentToDomainObject = _ => {
         const object = _.payload.doc.data();
         object.$id = _.payload.doc.id;
+        object.timeUi = object.time.toDate()
         return object;
     }
 }

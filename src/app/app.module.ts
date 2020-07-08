@@ -1,7 +1,6 @@
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 
 
@@ -12,8 +11,8 @@ import {AppComponent} from './app.component';
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 import {LimitService} from './dashboard/limit.service';
 import {AngularMaterialModule} from './layouts/admin-layout/material.module';
-import { AboutUsComponent } from './about-us/about-us.component';
-import {CountriesMapModule} from 'countries-map';
+import {AboutUsComponent} from './about-us/about-us.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -21,8 +20,7 @@ import {CountriesMapModule} from 'countries-map';
         FormsModule,
         ReactiveFormsModule,
 
-        CountriesMapModule,
-        HttpModule,
+        HttpClientModule,
         ComponentsModule,
         RouterModule,
         AppRoutingModule,
@@ -38,4 +36,5 @@ import {CountriesMapModule} from 'countries-map';
     bootstrap: [AppComponent]
 })
 export class AppModule {
+
 }

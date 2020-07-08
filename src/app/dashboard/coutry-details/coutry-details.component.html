@@ -1,9 +1,9 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="card">
+        <div class="card" *ngIf="!!country">
             <div class="card-header card-header-danger">
                 <h4 class="card-title"> {{ country.country }}</h4>
-                <p class="card-category"> Обновлено: {{country.time| date: 'dd-MM-yyyy'}}</p>
+                <p class="card-category"> Обновлено: {{country.timeUi | date: 'dd/MM/yyyy'}}</p>
             </div>
             <div class="card-body">
                 <div id="typography">

@@ -1,7 +1,8 @@
 <a
         style="cursor: pointer;"
         [routerLink]="[countyName]"
-        routerLinkActive="active"
+        routerLinkActive="active" id="{{ 'country' + country.$id }}"
+        (click)="saveEL()"
         class="list-group-item clearfix">
     <div class="card card-stats">
         <div class="card-header  card-header-warning card-header-icon">
@@ -11,6 +12,17 @@
         </div>
         <div class="card-body">
             <div class="card-title" [innerHTML]="country.summary"></div>
+        </div>
+        <div class="card-footer">
+            <div class="stats">
+                <i class="material-icons">date_range</i> Обновлено: {{country.timeUi | date: 'dd/MM/yyyy'}}
+            </div>
+            <div>
+                <button mat-raised-button class="btn btn-default btn-sm">
+                    Читать далее <i class="material-icons">read_more</i>
+                </button>
+                <!--                <i class="material-icons">read_more</i> Читать далее-->
+            </div>
         </div>
     </div>
     <!--    <div class="pull-left">-->
