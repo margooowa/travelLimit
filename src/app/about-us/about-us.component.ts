@@ -55,4 +55,11 @@ export class AboutUsComponent implements OnInit {
         });
     }
 
+    isNotMobileMenu() {
+        if ($(window).width() > 991) {
+            return true;
+        }
+        return false;
+    }
+
 }

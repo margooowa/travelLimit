@@ -1,4 +1,4 @@
-<div class="main-content">
+<div class="main-content" id="content">
 
     <div class="container-fluid">
         <div class="row">
@@ -11,9 +11,9 @@
                                    aria-label="Number"
                                    matInput
                                    [formControl]="myControl"
-                                   [matAutocomplete]="auto">
-                            <mat-autocomplete #auto="matAutocomplete" md-selected-item="selectedItem"
-                                              (optionSelected)="onSelect($event.option.value)">
+                                   [matAutocomplete]="auto" #autoInput>
+                            <mat-autocomplete #auto="matAutocomplete"
+                                              (optionSelected)="onSelect($event, autoInput)">
                                 <mat-option *ngFor="let country of filteredOptions | async" [value]="country">
                                     {{country}}
                                 </mat-option>
@@ -23,18 +23,21 @@
                 </div>
             </div>
         </div>
-
-<!--        <countries-map [data]="mapData" ></countries-map>-->
-
-        <div class="row">
-            <div class="col-xs-12">
+        <div class="row"  #divs>
+            <div class="col s12" id="divs">
                 <app-county-item
                         *ngFor="let limitEl of limits; let i = index"
-                        [country]="limitEl"
+                        [country]="limitEl" [id]="limitEl.$id"
                         [countyName]="limitEl.country"></app-county-item>
             </div>
 
 
         </div>
+
+<!--        <div class="row" id="after" #after>-->
+<!--            test-->
+
+
+<!--        </div>-->
     </div>
 </div>

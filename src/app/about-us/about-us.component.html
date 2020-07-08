@@ -7,16 +7,66 @@
             <div class="card-body">
                 <div id="typography">
                     <div class="tim-note">
-                        Словами мы описываем чувства, эмоции и воспоминания. Некоторые владеют ими так умело, что
-                        заставляют пережить иллюзию и поверить в вещи, которые казались невозможными.
+                        <p>Мы &ndash; это команда влюбленных в путешествия.</p>
+                        <p>В современном переменчивом мире, к сожалению, существуют, а также появляются новые
+                            ограничения, запреты, законы на передвижения. Это создает много препятствий для свободных и
+                            безопасных путешествий.&nbsp; Собирая базу знаний для самих себя, мы поняли, что хотим
+                            помочь всем, кто любит исследовать мир, переживать новые эмоции, открывая новые уголки на
+                            нашей родной планете. Мы берем информацию с источников, которые заслуживают доверия.</p>
+                        <p>Будем благодарны за Ваш отзыв и предложения, что бы Вы еще хотели видеть на нашем сайте.</p>
 
-                        Путешествия меняют нас, помогают нам расти и развиваться. Путешествия – это лучшее образование
-                        современного мира!
-
-                        Я собрал для вас цитаты про путешествия известнейших поэтов, писателей и философов. Их опыт и
-                        слова, которые появились в результате, помогут разобраться во многих житейских проблемах и даже
-                        решиться на важный шаг.
                     </div>
+                </div>
+                <div>
+                    <div class="row" *ngIf="isNotMobileMenu(); else mobileblock">
+                        <div class="photo-us">
+                            <img class="img" src="./assets/img/faces/IMG_2682.jpg"/>
+                        </div>
+                        <div class="photo-us">
+                            <img class="img" src="./assets/img/faces/IMG_2560.jpg"/>
+                        </div>
+                        <div class="photo-us">
+                            <img class="img" src="./assets/img/faces/denis2.jpg"/>
+                        </div>
+                        <div class="photo-us">
+                            <img class="img" src="./assets/img/faces/IMG_1893.jpg"/>
+                        </div>
+                        <div class="photo-us">
+                            <img class="img" src="./assets/img/faces/IMG_4334.jpg"/>
+                        </div>
+                        <div class="photo-us">
+                            <img class="img" src="./assets/img/faces/IMG_5420.jpg"/>
+                        </div>
+                        <div class="photo-us">
+                            <img class="img" src="./assets/img/faces/IMG_5786.jpg"/>
+                        </div>
+                        <div class="photo-us">
+                            <img class="img" src="./assets/img/faces/IMG_4368.jpg"/>
+                        </div>
+                        <div class="photo-us">
+                            <img class="img" src="./assets/img/faces/IMG_7509.JPG"/>
+                        </div>
+                        <div class="photo-us">
+                            <img class="img" src="./assets/img/faces/IMG_7524.jpg"/>
+                        </div>
+                        <div class="photo-us">
+                            <img class="img" src="./assets/img/faces/denis3.jpg"/>
+                        </div>
+                        <div class="photo-us">
+                            <img class="img" src="./assets/img/faces/IMG_20190111_153106.jpg"/>
+                        </div>
+                    </div>
+                    <ng-template #mobileblock>
+                        <div class="row">
+                            <div class="photo-us">
+                                <img class="img" src="./assets/img/faces/IMG_2682.jpg"/>
+                            </div>
+                            <div class="photo-us">
+                                <img class="img" src="./assets/img/faces/IMG_4334.jpg"/>
+                            </div>
+
+                        </div>
+                    </ng-template>
                 </div>
 
             </div>
@@ -27,7 +77,7 @@
                 <div class="row">
                     <div class="col-md-10">
                         <div class="card">
-                            <div class="card-header card-header-info">
+                            <div class="card-header card-header-danger">
                                 <h4 class="card-title"> Ваши предложения и замечания</h4>
                             </div>
                             <div class="card-body">

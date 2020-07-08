@@ -11,8 +11,7 @@ import {AppComponent} from './app.component';
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 import {LimitService} from './dashboard/limit.service';
 import {AngularMaterialModule} from './layouts/admin-layout/material.module';
-import { AboutUsComponent } from './about-us/about-us.component';
-import {CountriesMapModule} from 'countries-map';
+import {AboutUsComponent} from './about-us/about-us.component';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -21,7 +20,6 @@ import {HttpClientModule} from '@angular/common/http';
         FormsModule,
         ReactiveFormsModule,
 
-        CountriesMapModule,
         HttpClientModule,
         ComponentsModule,
         RouterModule,
@@ -38,4 +36,5 @@ import {HttpClientModule} from '@angular/common/http';
     bootstrap: [AppComponent]
 })
 export class AppModule {
+
 }

@@ -49,7 +49,13 @@
   .card-body,
   .card-footer {
     padding: $padding-card-body-y $padding-card-body-x;
+    padding-bottom: 0 !important;
   }
+  .card,
+  .button-wrapper {
+    padding-bottom: 10px;
+  }
+
 
   .card-body {
       & + .card-footer{
@@ -456,6 +462,7 @@
     border-radius: 0;
     justify-content: space-between;
     align-items: center;
+    border-top: 1px solid #eee;
 
     h6 {
       width: 100%;
@@ -632,7 +639,7 @@
     padding: 6px 15px 0px !important;
   }
   .card-footer {
-    border-top: none !important;
+    border-top: 1px solid #eee;
   }
 }
 

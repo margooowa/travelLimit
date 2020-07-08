@@ -36,7 +36,9 @@ const routes: Routes = [
         AngularFirestoreModule,
         AngularFireAuthModule,
         RouterModule.forRoot(routes, {
-            useHash: true
+            useHash: false,
+            anchorScrolling: 'enabled',
+            scrollPositionRestoration: 'enabled'
         }),
     ],
     exports: []

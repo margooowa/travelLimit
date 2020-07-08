@@ -1,43 +1,57 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import * as Chartist from 'chartist';
+import {
+    AfterContentInit,
+    AfterViewChecked, AfterViewInit,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Inject,
+    Injectable,
+    OnInit,
+    Output,
+    QueryList, Renderer2, ViewChild,
+    ViewChildren
+} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {filter, map, startWith, withLatestFrom} from 'rxjs/operators';
 import {LimitService} from './limit.service';
 import {Limit} from './limits.model';
-import {ActivatedRoute, Params} from '@angular/router';
-import {CountriesData} from 'countries-map';
+import {ActivatedRoute, Params, Router, Scroll} from '@angular/router';
+import {DOCUMENT, ViewportScroller} from '@angular/common';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterContentInit, AfterViewInit {
+
 
     myControl = new FormControl();
     options: string[];
     filteredOptions: Observable<string[]>;
     public limits: Limit[];
+    filterValue: string;
+
     continent: string;
-    public mapData: CountriesData = {
-        'ES': { 'value': 416 },
-        'GB': { 'value': 94 },
-        'FR': { 'value': 255 }
-    };
+    @ViewChild('divs') el: ElementRef;
+    listener;
 
     @Output()
     optionSelected: EventEmitter<MatAutocompleteSelectedEvent>;
 
 
     constructor(private limitService: LimitService,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute,
+                private rd: Renderer2) {
+        this.listener = this.rd.listen('window', 'scroll', (e) => {
+            console.log(this.getYPosition(e));
+        });
     }
 
 
     ngOnInit() {
-        console.log('init')
 
         this.route.params
             .subscribe(
@@ -48,18 +62,11 @@ export class DashboardComponent implements OnInit {
                     }
                 }
             );
-
-
         if (this.continent == null) {
             this.getLimits();
         } else {
             this.getLimitsContinent(this.continent);
         }
-        // this.limits.forEach((element) => {
-        //     this.options.push(element.country)
-        // });
-
-        // this.options.push('TEST2');
 
 
     }
@@ -73,12 +80,20 @@ export class DashboardComponent implements OnInit {
                 this.onGetLimits(this.limits)
             })
 
-    getLimitsContinent = (continent: string) =>
-        this.limitService
+    getLimitsContinent = (continent: string) => {
+        return this.limitService
             .getLimitsContinent(continent)
             .subscribe(res => {
                 this.limits = res;
-                this.onGetLimits(this.limits)
+                this.onGetLimits(this.limits);
+            });
+    }
+
+    getLimitsCounty = (countryName: string) =>
+        this.limitService
+            .getLimitsByCountryName(countryName)
+            .subscribe(res => {
+                this.limits = res;
             })
 
     // Auth Complete
@@ -94,7 +109,15 @@ export class DashboardComponent implements OnInit {
                     map(value => this._filter(value))
                 );
         }
-
+        // console.log(this.el.nativeElement)
+        // console.log(this.el.nativeElement.childNodes.length)
+        // const querySelector = this.el.nativeElement.childNodes.item('countryjL0sHEwPnLsPiPc3oAwn');
+        // console.log(querySelector)
+        // const element = document.getElementById('qMAq7L9kIZaBCQ6BVgWa');
+        // console.log(element)
+        // setTimeout(() => {
+        //     element.scrollIntoView({block: 'start', behavior: 'smooth', inline: 'nearest'});
+        // }, 200)
     }
 
     private _filter(value: string): string[] {
@@ -102,10 +125,33 @@ export class DashboardComponent implements OnInit {
         return this.options.filter(option => option.toLowerCase().includes(filterValue));
     }
 
-    onSelect(value: string) {
-        this.limits = this.limits.filter(
-            county => county.country === value);
+    onSelect(event: MatAutocompleteSelectedEvent, autoInput: HTMLInputElement) {
+        autoInput.value = '';
+        autoInput.blur();
+        event.option.deselect();
+        this.getLimitsCounty(event.option.value);
+        this.filteredOptions = this.myControl.valueChanges
+            .pipe(
+                startWith(''),
+                map(value => this._filter(value))
+            );
     }
 
+    ngAfterContentInit(): void {
+        // let elementById = document.getElementById('countryzlSjGVDeStwAnrMs4cpS') as HTMLElement;
+        // console.log(elementById)
+    }
+
+
+    ngAfterViewInit() {
+        // console.log(this.rd);
+        // this.el.nativeElement.focus();      //<<<=====same as oldest way
+        // const element = document.getElementById('qMAq7L9kIZaBCQ6BVgWa');
+        // console.log(element)
+    }
+
+    getYPosition(e: Event): number {
+        return (e.target as Element).scrollTop;
+    }
 }
 
