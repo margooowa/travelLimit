@@ -1,0 +1,8 @@
+.countryMap {
+    border: 1px;
+    overflow: hidden;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    background-color: #f1f1f1;
+}

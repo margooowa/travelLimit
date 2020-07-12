@@ -13,6 +13,8 @@ import {LimitService} from './dashboard/limit.service';
 import {AngularMaterialModule} from './layouts/admin-layout/material.module';
 import {AboutUsComponent} from './about-us/about-us.component';
 import {HttpClientModule} from '@angular/common/http';
+import { MapchartComponent } from './dashboard/mapchart/mapchart.component';
+import { CoronaMapComponent } from './dashboard/corona-map/corona-map.component';
 
 @NgModule({
     imports: [
@@ -30,6 +32,7 @@ import {HttpClientModule} from '@angular/common/http';
         AppComponent,
         AdminLayoutComponent,
         AboutUsComponent,
+        CoronaMapComponent
 
     ],
     providers: [LimitService],

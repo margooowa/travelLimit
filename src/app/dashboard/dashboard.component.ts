@@ -20,6 +20,7 @@ import {Limit} from './limits.model';
 import {ActivatedRoute, Params, Router, Scroll} from '@angular/router';
 import {DOCUMENT, ViewportScroller} from '@angular/common';
 
+declare var jQuery: any;
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
@@ -138,6 +139,7 @@ export class DashboardComponent implements OnInit, AfterContentInit, AfterViewIn
     }
 
     ngAfterContentInit(): void {
+
         // let elementById = document.getElementById('countryzlSjGVDeStwAnrMs4cpS') as HTMLElement;
         // console.log(elementById)
     }
