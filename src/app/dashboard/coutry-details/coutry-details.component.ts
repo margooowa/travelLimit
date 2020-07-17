@@ -9,7 +9,7 @@ import {ActivatedRoute, Params} from '@angular/router';
     styleUrls: ['./coutry-details.component.css']
 })
 export class CoutryDetailsComponent implements OnInit {
-    country: Limit;
+    public country: Limit;
     countyName: string;
 
     constructor(private limitService: LimitService,

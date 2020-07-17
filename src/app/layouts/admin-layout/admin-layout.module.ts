@@ -34,7 +34,8 @@ import {CountyItemComponent} from '../../dashboard/county-item/county-item.compo
 import {UpdateCountryComponent} from 'app/user-profile/crud/update-country/update-country.component';
 import {EditorModule} from '@tinymce/tinymce-angular';
 import {MatCardModule} from '@angular/material/card';
-import {MapchartComponent} from '../../dashboard/mapchart/mapchart.component';
+import {DialogCountryComponent, MapchartComponent} from '../../dashboard/mapchart/mapchart.component';
+import {MapCountryDetailsComponent} from '../../dashboard/coutry-details/map-country-details/map-country-details.component';
 
 // @ts-ignore
 @NgModule({
@@ -94,6 +95,8 @@ import {MapchartComponent} from '../../dashboard/mapchart/mapchart.component';
         CountyItemComponent,
         AddCountryComponent,
         MapchartComponent,
+        MapCountryDetailsComponent,
+        DialogCountryComponent,
         CountryListComponent,
         UpdateCountryComponent,
         UserProfileComponent,

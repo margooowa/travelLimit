@@ -1,0 +1,47 @@
+[
+  {
+    "id": "CR",
+    "name": "Хорватия",
+    "capital": {
+      "title": "Загреб",
+      "latitude": 45.8,
+      "longitude": 16
+    }
+  },
+  {
+    "id": "EG",
+    "name": "Египет",
+    "capital": {
+      "title": "Каир",
+      "latitude": 30.05,
+      "longitude": 31.25
+    }
+  },
+  {
+    "id": "TR",
+    "name": "Турция",
+    "capital": {
+      "title": "Анкара",
+      "latitude": 39.9333333,
+      "longitude": 32.866667
+    }
+  },
+  {
+    "id": "UA",
+    "name": "Украина",
+    "capital": {
+      "title": "Киев",
+      "latitude": 50.43333333,
+      "longitude": 30.516667
+    }
+  },
+  {
+    "id": "US",
+    "name": "США",
+    "capital": {
+      "title": "Вашингтон",
+      "latitude": 38.883333,
+      "longitude": -77
+    }
+  }
+]
