@@ -8,10 +8,9 @@ import am4geodata_lang_RU from '@amcharts/amcharts4-geodata/lang/RU';
 import * as am4core from '@amcharts/amcharts4/core';
 import am4geodata_worldLow from '@amcharts/amcharts4-geodata/worldLow';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-import {DialogCountryComponent} from '../../mapchart/mapchart.component';
-import {MapColor} from '../../mapColor.model';
 import {LimitService} from '../../limit.service';
 import {CityValues} from 'app/dashboard/cityValues.model';
+import {CountriesValues} from '../../countriesValues.model';
 
 @Component({
     selector: 'app-map-country-details',
@@ -25,9 +24,9 @@ export class MapCountryDetailsComponent implements OnInit, AfterViewInit, OnDest
     private chartDom: ElementRef;
 
     @Input() countryMap: Limit;
-    public cities: CityValues[] = [];
-    private citiesMap: Map<string, CityValues> = new Map<string, CityValues>();
-    private dataColor: MapColor[] = [];
+    public selectedCities: CityValues[] = [];
+    public selectedCountries: CountriesValues[] = [];
+    private countriesMapAll: Map<string, CountriesValues> = new Map<string, CountriesValues>();
 
 
     @Input()
@@ -40,6 +39,9 @@ export class MapCountryDetailsComponent implements OnInit, AfterViewInit, OnDest
     }
 
     isShow() {
+        // if (!this.countryMap) {
+        //     return false;
+        // } else
         if (this.countryMap.country === 'Украина') {
             return true;
         }
@@ -54,12 +56,11 @@ export class MapCountryDetailsComponent implements OnInit, AfterViewInit, OnDest
 
 
     ngOnInit(): void {
-        this.getCities();
+        this.countriesMapAll = this.limitService.getCountiesMap()
     }
 
 
     ngAfterViewInit() {
-        // this.router.navigate(['/user-profile']);
         if (this.countryMap.country === 'Украина') {
             am4core.useTheme(am4themes_animated);
             this.zone.runOutsideAngular(() => {
@@ -68,6 +69,8 @@ export class MapCountryDetailsComponent implements OnInit, AfterViewInit, OnDest
                 this.chart = am4core.create(this.chartDom.nativeElement, am4maps.MapChart);
                 this.chart.language.locale = am4lang_ru_RU;
                 this.chart.geodataNames = am4geodata_lang_RU;
+
+                this.chart.logo.height = -15;
 
 // Set map definition
                 this.chart.geodata = am4geodata_worldLow;
@@ -91,28 +94,30 @@ export class MapCountryDetailsComponent implements OnInit, AfterViewInit, OnDest
                 //     // get object info
                 //     console.log(ev.target.dataItem.dataContext);
                 //     console.log(this.countryMap)
-                //     const dialogRef = this.dialog.open(DialogCountryComponent);
-                //
-                //     dialogRef.afterClosed().subscribe(result => {
-                //         console.log(`Dialog result: ${result}`);
-                //     });
+                //     // const dialogRef = this.dialog.open(DialogCountryComponent);
+                //     //
+                //     // dialogRef.afterClosed().subscribe(result => {
+                //     //     console.log(`Dialog result: ${result}`);
+                //     // });
                 //     // this.router.navigate(['/dashboard/%D0%98%D0%BD%D0%B4%D0%B8%D1%8F']);
                 // }, this);
                 polygonTemplate.tooltipText = '{name}';
                 polygonTemplate.polygon.fillOpacity = 0.6;
 
+                for (var countryloop of this.country.allowedCountries) {
+                    console.log(countryloop)
+                    const countriesValues = this.countriesMapAll.get(countryloop);
+                    this.selectedCountries.push(countriesValues);
+                    this.selectedCities.push(countriesValues.capital);
+                    // this.dataColor.push(countriesValues);
+                }
+
+                const currentCountryLocation = this.countriesMapAll.get(this.country.country);
+                const currentCapitalLocation = currentCountryLocation.capital
+                this.selectedCountries.push(currentCountryLocation);
+
                 let color = am4core.color('#7cb342');
-                let map1: MapColor = new MapColor('BS', color, 'Paris');
-                let map2: MapColor = new MapColor('MV', color, 'Paris');
-                let map3: MapColor = new MapColor('TR', color, 'Paris');
-                let map4: MapColor = new MapColor('FR', color, 'Paris');
-                let map5: MapColor = new MapColor('UA', color, 'Paris');
-                this.dataColor.push(map1);
-                this.dataColor.push(map2);
-                this.dataColor.push(map3);
-                this.dataColor.push(map4);
-                this.dataColor.push(map5);
-                polygonSeries.data = this.dataColor;
+                polygonSeries.data = this.selectedCountries;
 
                 polygonTemplate.propertyFields.fill = 'fill';
 
@@ -132,12 +137,17 @@ export class MapCountryDetailsComponent implements OnInit, AfterViewInit, OnDest
                 imageSeries.mapImages.template.tooltipText = '{title}';
                 imageSeries.mapImages.template.propertyFields.url = 'url';
 
+                imageSeries.mapImages.template.nonScaling = true;
+
                 let circle = imageSeries.mapImages.template.createChild(am4core.Circle);
+
                 circle.radius = 3;
+                // circle.nonScaling = true;
                 circle.propertyFields.fill = 'color';
 
                 let circle2 = imageSeries.mapImages.template.createChild(am4core.Circle);
                 circle2.radius = 3;
+                // circle.nonScaling = true;
                 circle2.propertyFields.fill = 'color';
 
 
@@ -157,146 +167,28 @@ export class MapCountryDetailsComponent implements OnInit, AfterViewInit, OnDest
                     })
                 }
 
-                let colorSet = new am4core.ColorSet();
-
-
-                // let paris = addCity({'latitude': 48.8567, 'longitude': 2.3510}, 'Paris');
-                // // let toronto = addCity({'latitude': 43.8163, 'longitude': -79.4287}, 'Toronto');
-                // let la = addCity({'latitude': 34.3, 'longitude': -118.15}, 'Los Angeles');
                 let cities = this.chart.series.push(new am4maps.MapImageSeries());
-                cities.mapImages.template.nonScaling = true;
-                let kiev = cities.mapImages.create();
-                kiev.latitude = 50.4422;
-                kiev.longitude = 30.5367;
-                kiev.tooltipText = 'Kyiv';
-                kiev.fill = color;
+                // cities.mapImages.template.nonScaling = true;
 
-                let ankara = cities.mapImages.create();
-                ankara.latitude = 39.9439;
-                ankara.longitude = 32.8560;
-                ankara.tooltipText = 'Ankara';
-                ankara.fill = color;
 
-                console.log(this.cities.length)
-                console.log(this.limitService.getCitiesMap().size)
-                this.cities.push(this.limitService.getCitiesMap().get('Ankara'))
-                imageSeries.data = this.cities;
+                imageSeries.data = this.selectedCities;
+                imageSeries.data.push(currentCapitalLocation)
 
-                // imageSeries.data = [{
-                //     'title': 'Brussels',
-                //     'latitude': 50.8371,
-                //     'longitude': 4.3676,
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'Copenhagen',
-                //     'latitude': 55.6763,
-                //     'longitude': 12.5681,
-                //     'color': color
-                // }, {
-                //     'title': 'Paris',
-                //     'latitude': 48.8567,
-                //     'longitude': 2.3510,
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'Reykjavik',
-                //     'latitude': 64.1353,
-                //     'longitude': -21.8952,
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'Moscow',
-                //     'latitude': 55.7558,
-                //     'longitude': 37.6176,
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'Madrid',
-                //     'latitude': 40.4167,
-                //     'longitude': -3.7033,
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'London',
-                //     'latitude': 51.5002,
-                //     'longitude': -0.1262,
-                //     'url': 'http://www.google.co.uk',
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'Peking',
-                //     'latitude': 39.9056,
-                //     'longitude': 116.3958,
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'New Delhi',
-                //     'latitude': 28.6353,
-                //     'longitude': 77.2250,
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'Tokyo',
-                //     'latitude': 35.6785,
-                //     'longitude': 139.6823,
-                //     'url': 'http://www.google.co.jp',
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'Buenos Aires',
-                //     'latitude': -34.6118,
-                //     'longitude': -58.4173,
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'Brasilia',
-                //     'latitude': -15.7801,
-                //     'longitude': -47.9292,
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'Ottawa',
-                //     'latitude': 45.4235,
-                //     'longitude': -75.6979,
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'Washington',
-                //     'latitude': 38.8921,
-                //     'longitude': -77.0241,
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'Kinshasa',
-                //     'latitude': -4.3369,
-                //     'longitude': 15.3271,
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'Cairo',
-                //     'latitude': 30.0571,
-                //     'longitude': 31.2272,
-                //     'color': colorSet.next()
-                // }, {
-                //     'title': 'Pretoria',
-                //     'latitude': -25.7463,
-                //     'longitude': 28.1876,
-                //     'color': colorSet.next()
-                // }];
-
-                imageSeries.data.push(kiev)
-                imageSeries.data.push(ankara)
 
                 let colorBlue = am4core.color('#02A8F3');
+
                 // Add lines
-                // let lineSeries = this.chart.series.push(new am4maps.MapArcSeries());
                 let lineSeries = this.chart.series.push(new am4maps.MapLineSeries());
                 lineSeries.dataFields.multiGeoLine = 'multiGeoLine';
-                lineSeries.mapLines.template.line.fill = colorBlue;
-                lineSeries.mapLines.template.line.strokeWidth = 5;
-                lineSeries.mapLines.template.line.strokeOpacity = 0.1;
-                // lineSeries.mapLines.template.arrow.nonScaling = true;
-                // lineSeries.mapLines.template.arrow.width = 4;
-                // lineSeries.mapLines.template.arrow.height = 6;
-                // lineSeries.mapLines.template.arrow.fill = colorBlue;
-                // lineSeries.mapLines.template.line.stroke = city.fill;
-                lineSeries.mapLines.template.line.nonScalingStroke = true;
-                // lineSeries.mapLines.template.line.strokeDasharray = '1,1';
 
-                lineSeries.zIndex = 10;
-
-                // let shadowLineSeries = this.chart.series.push(new am4maps.MapLineSeries());
-                // shadowLineSeries.mapLines.template.line.strokeOpacity = 0;
-                // shadowLineSeries.mapLines.template.line.nonScalingStroke = true;
-                // shadowLineSeries.mapLines.template.shortestDistance = false;
-                // shadowLineSeries.zIndex = 5;
+                let lineTemplate = lineSeries.mapLines.template;
+                lineTemplate.nonScalingStroke = true;
+                lineTemplate.arrow.nonScaling = true;
+                lineTemplate.arrow.width = 4;
+                lineTemplate.arrow.height = 6;
+                // lineTemplate.stroke = interfaceColors.getFor("alternativeBackground");
+                // lineTemplate.fill = interfaceColors.getFor("alternativeBackground");
+                lineTemplate.line.strokeOpacity = 0.4;
 
                 function addLine(from, to) {
                     let line = lineSeries.mapLines.create();
@@ -309,7 +201,25 @@ export class MapCountryDetailsComponent implements OnInit, AfterViewInit, OnDest
                     return line;
                 }
 
-                addLine(kiev, ankara);
+                const currentCapitalImage = cities.mapImages.create();
+                currentCapitalImage.latitude = currentCapitalLocation.latitude;
+                currentCapitalImage.longitude = currentCapitalLocation.longitude;
+                currentCapitalImage.tooltipText = currentCapitalLocation.title;
+                currentCapitalImage.fill = currentCapitalLocation.color;
+
+
+                for (var cityValue of this.selectedCities) {
+                    let curr = cities.mapImages.create();
+                    curr.latitude = cityValue.latitude;
+                    curr.longitude = cityValue.longitude;
+                    curr.tooltipText = cityValue.title;
+                    curr.fill = cityValue.color;
+                    // console.log(currentCapitalImage, curr)
+                    addLine(currentCapitalImage, curr);
+                }
+
+                // console.log(kiev, ankara)
+                // addLine(kiev, ankara);
 
 
             });
@@ -319,16 +229,6 @@ export class MapCountryDetailsComponent implements OnInit, AfterViewInit, OnDest
     myFunction(ev, router: Router) {
         console.log('clicked on ', ev.target);
     }
-
-    getCities = () =>
-        this.limitService
-            .getCities()
-            .subscribe(res => {
-                // res.forEach(function (value) {
-                //     this.citiesMap.set(value.title, value);
-                // })
-                this.cities = res;
-            })
 
 
     ngOnDestroy() {

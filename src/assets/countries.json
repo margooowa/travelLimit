@@ -1,6 +1,6 @@
 [
   {
-    "id": "CR",
+    "id": "HR",
     "name": "Хорватия",
     "capital": {
       "title": "Загреб",
@@ -42,6 +42,294 @@
       "title": "Вашингтон",
       "latitude": 38.883333,
       "longitude": -77
+    }
+  },
+  {
+    "id": "RS",
+    "name": "Сербия",
+    "capital": {
+      "title": "Белград",
+      "latitude": 44.83333333,
+      "longitude": 20.5
+    }
+  },
+  {
+    "id": "AL",
+    "name": "Албания",
+    "capital": {
+      "title": "Тирана",
+      "latitude": 41.31666667,
+      "longitude": 19.816667
+    }
+  },
+  {
+    "id": "MK",
+    "name": "Македония",
+    "capital": {
+      "title": "Скопье",
+      "latitude": 42,
+      "longitude": 21.433333
+    }
+  },
+  {
+    "id": "ME",
+    "name": "Черногория",
+    "capital": {
+      "title": "Подгорица",
+      "latitude": 42.43333333,
+      "longitude": 19.266667
+    }
+  },
+  {
+    "id": "BY",
+    "name": "Беларусь",
+    "capital": {
+      "title": "Минск",
+      "latitude": 53.9,
+      "longitude": 27.566667
+    }
+  },
+  {
+    "id": "GB",
+    "name": "Великобритания",
+    "capital": {
+      "title": "Лондон",
+      "latitude": 51.5,
+      "longitude": -0.083333
+    }
+  },
+  {
+    "id": "MX",
+    "name": "Мексика",
+    "capital": {
+      "title": "Мехико",
+      "latitude": 19.43333333,
+      "longitude": -99.133333
+    }
+  },
+  {
+    "id": "TN",
+    "name": "Тунис",
+    "capital": {
+      "title": "Тунис",
+      "latitude": 36.8,
+      "longitude": 10.183333
+    }
+  },
+  {
+    "id": "KR",
+    "name": "Южная Корея",
+    "capital": {
+      "title": "Сеул",
+      "latitude": 37.55,
+      "longitude": 126.983333
+    }
+  },
+  {
+    "id": "IR",
+    "name": "Иран",
+    "capital": {
+      "title": "Тегеран",
+      "latitude": 35.7,
+      "longitude": 51.416667
+    }
+  },
+  {
+    "id": "IQ",
+    "name": "Ирак",
+    "capital": {
+      "title": "Багдад",
+      "latitude": 33.33333333,
+      "longitude": 44.4
+    }
+  },
+  {
+    "id": "AF",
+    "name": "Афганистан",
+    "capital": {
+      "title": "Кабул",
+      "latitude": 34.51666667,
+      "longitude": 69.183333
+    }
+  },
+  {
+    "id": "SS",
+    "name": "Южный Судан",
+    "capital": {
+      "title": "Джуба",
+      "latitude": 4.85,
+      "longitude": 31.616667
+    }
+  },
+  {
+    "id": "ET",
+    "name": "Эфиопия",
+    "capital": {
+      "title": "Аддис-Абеба",
+      "latitude": 9.033333333,
+      "longitude": 38.7
+    }
+  },
+  {
+    "id": "SO",
+    "name": "Сомали",
+    "capital": {
+      "title": "Могадишо",
+      "latitude": 2.066666667,
+      "longitude": 45.333333
+    }
+  },
+  {
+    "id": "KE",
+    "name": "Кения",
+    "capital": {
+      "title": "Найроби",
+      "latitude": -1.283333333,
+      "longitude": 36.816667
+    }
+  },
+  {
+    "id": "ZM",
+    "name": "Замбия",
+    "capital": {
+      "title": "Лусака",
+      "latitude": -15.41666667,
+      "longitude": 28.283333
+    }
+  },
+  {
+    "id": "BI",
+    "name": "Бурунди",
+    "capital": {
+      "title": "Гитега",
+      "latitude": -3.366666667,
+      "longitude": 29.35
+    }
+  },
+  {
+    "id": "TZ",
+    "name": "Танзания",
+    "capital": {
+      "title": "Додома",
+      "latitude": -6.802353,
+      "longitude": 39.279556
+    }
+  },
+  {
+    "id": "SC",
+    "name": "Сейшельские острова",
+    "capital": {
+      "title": "Виктория",
+      "latitude": -4.616666667,
+      "longitude": 55.45
+    }
+  },
+  {
+    "id": "BG",
+    "name": "Болгария",
+    "capital": {
+      "title": "София",
+      "latitude": 42.68333333,
+      "longitude": 23.316667
+    }
+  },
+  {
+    "id": "MV",
+    "name": "Мальдивы",
+    "capital": {
+      "title": "Мале",
+      "latitude": 4.166666667,
+      "longitude": 73.5
+    }
+  },
+  {
+    "id": "AG",
+    "name": "Антигуа и Барбуда",
+    "capital": {
+      "title": "Сент-Джонс",
+      "latitude": 17.11666667,
+      "longitude": -61.85
+    }
+  },
+  {
+    "id": "SI",
+    "name": "Словения",
+    "capital": {
+      "title": "Любляна",
+      "latitude": 46.05,
+      "longitude": 14.516667
+    }
+  },
+  {
+    "id": "IE",
+    "name": "Ирландия",
+    "capital": {
+      "title": "Дублин",
+      "latitude": 53.31666667,
+      "longitude": -6.233333
+    }
+  },
+  {
+    "id": "BS",
+    "name": "Багамы",
+    "capital": {
+      "title": "Нассау",
+      "latitude": 25.08333333,
+      "longitude": -77.35
+    }
+  },
+  {
+    "id": "JM",
+    "name": "Ямайка",
+    "capital": {
+      "title": "Кингстон",
+      "latitude": 18,
+      "longitude": -76.8
+    }
+  },
+  {
+    "id": "KH",
+    "name": "Камбоджа",
+    "capital": {
+      "title": "Пном Пен",
+      "latitude": 11.55,
+      "longitude": 104.916667
+    }
+  },
+  {
+    "id": "KM",
+    "name": "Коморские острова",
+    "capital": {
+      "title": "Морони",
+      "latitude": -11.7,
+      "longitude": 43.233333
+    }
+  },
+  {
+    "id": "PR",
+    "name": "Пуэрто-Рико",
+    "capital": {
+      "title": "Сан-Хуан",
+      "latitude": 18.46666667,
+      "longitude": -66.116667
+    }
+  },
+  {
+    "id": "PK",
+    "name": "Пакистан",
+    "capital": {
+      "title": "Исламабад",
+      "latitude": 33.68333333,
+      "longitude": 73.05
+    }
+  },
+  {
+    "id": "EC",
+    "name": "Эквадор",
+    "capital": {
+      "title": "Кито",
+      "latitude": -0.216666667,
+      "longitude": -78.5
     }
   }
 ]

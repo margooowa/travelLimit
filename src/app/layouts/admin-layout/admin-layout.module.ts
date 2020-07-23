@@ -36,6 +36,7 @@ import {EditorModule} from '@tinymce/tinymce-angular';
 import {MatCardModule} from '@angular/material/card';
 import {DialogCountryComponent, MapchartComponent} from '../../dashboard/mapchart/mapchart.component';
 import {MapCountryDetailsComponent} from '../../dashboard/coutry-details/map-country-details/map-country-details.component';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 // @ts-ignore
 @NgModule({
@@ -56,6 +57,7 @@ import {MapCountryDetailsComponent} from '../../dashboard/coutry-details/map-cou
         MatDividerModule,
         MatAutocompleteModule,
         EditorModule,
+        NgSelectModule,
         // AngularMaterialModule,
 
         CommonModule,

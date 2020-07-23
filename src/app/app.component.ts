@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import {LimitService} from './dashboard/limit.service';
 // declare ga as a function to set and sent the events
 declare let gtag: Function;
 
@@ -12,7 +13,8 @@ declare let gtag: Function;
 
 export class AppComponent {
 
-    constructor(public router: Router) {
+    constructor(public router: Router, public limitService: LimitService) {
+        limitService.getCountiesSubscribe();
         this.router.events.subscribe(event => {
                 if (event instanceof NavigationEnd) {
                     gtag('config', 'UA-168165866-1',

@@ -4,5 +4,13 @@
     border-top: 1px solid #ccc;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
-    background-color: #f1f1f1;
+    /*background-color: #f1f1f1;*/
 }
+
+g[aria-labelledby=id-79-title] {
+    visibility: hidden;
+}
+
+/*svg > g > g:nth-child(2) > g:nth-child(2) > g > g:nth-child(3) {*/
+/*    visibility: hidden !important;*/
+/*}*/

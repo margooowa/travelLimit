@@ -42,7 +42,6 @@ export class CountryListComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit() {
         this.dataSourceLimit.sort = this.sort
-        console.log(this.sort);
     }
 
 

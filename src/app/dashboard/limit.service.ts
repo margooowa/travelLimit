@@ -15,7 +15,6 @@ import {CountriesValues} from './countriesValues.model';
 export class LimitService {
 
     private colorSet = new am4core.ColorSet();
-    private citiesMap: Map<string, CityValues> = new Map<string, CityValues>();
     private countriesMap: Map<string, CountriesValues> = new Map<string, CountriesValues>();
 
     constructor(private firestoreSer: AngularFirestore,
@@ -28,12 +27,18 @@ export class LimitService {
     updateLimit(recordID, record: Limit) {
         record.time = firestore.Timestamp.now();
         record.userId = this.authService.getEmail();
+        if (!record.allowedCountries) {
+            record.allowedCountries = [];
+        }
         this.firestoreSer.collection('limits').doc(recordID).update(record);
     }
 
     addLimit(record: Limit) {
         record.time = firestore.Timestamp.now();
         record.userId = this.authService.getEmail();
+        if (!record.allowedCountries) {
+            record.allowedCountries = [];
+        }
         this.firestoreSer.collection('limits').add(record);
     }
 
@@ -74,52 +79,30 @@ export class LimitService {
     }
 
 
-    // getCities(): Observable<CityValues[]> {
-    //     return this.http.get('./app/dashboard/cities.json')
-    //         .pipe(map(city => {
-    //             let object:CityValues = city;
-    //             return object
-    //         }));
-    // }
-
-
-    getCities(): Observable<CityValues[]> {
-        return this.http.get<CityValues[]>('./assets/cities.json')
-            .pipe(map(actions => actions.map(this.toCity)));
-    }
-
-    getCitiesMap(): Map<string, CityValues> {
-        if (Object.keys(this.citiesMap).length === 0 && this.citiesMap.constructor === Object) {
-            this.http.get<CityValues[]>('./assets/cities.json')
-                .pipe(map(actions => actions.map(this.toCity)))
-        }
-        return this.citiesMap;
-    }
-
     getCounties(): Observable<CountriesValues[]> {
-        return this.http.get<CityValues[]>('./assets/countries.json')
+        console.log('get counties')
+        return this.http.get<CountriesValues[]>('./assets/countries.json')
             .pipe(map(actions => actions.map(this.toCountryMap)))
     }
 
+    getCountiesSubscribe = () =>
+        this.getCounties()
+            .subscribe(res => {
+                for (var value of res) {
+                    this.countriesMap.set(value.name, value);
+                }
+                // this.cities = res;
+            })
+
     getCountiesMap(): Map<string, CountriesValues> {
-        if (Object.keys(this.citiesMap).length === 0 && this.citiesMap.constructor === Object) {
-            this.http.get<CityValues[]>('./assets/countries.json')
-                .pipe(map(actions => actions.map(this.toCountryMap)))
-        }
         return this.countriesMap;
     }
 
 
-    toCity = _ => {
-        const object = _;
-        object.color = this.colorSet.next();
-        this.citiesMap.set(object.title, object);
-        return object;
-    }
-
     toCountryMap = _ => {
         const object: CountriesValues = _;
-        object.fill = this.colorSet.next();
+        object.fill = am4core.color('#7cb342');
+        object.capital.color = this.colorSet.next();
         this.countriesMap.set(object.name, object);
         return object;
     }

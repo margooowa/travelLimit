@@ -1,16 +1,18 @@
 <div class="main-content">
     <div class="container-fluid">
-                <div class="row" >
-                    <div class="col-lg-8 col-md-10 ml-auto mr-auto countryMap">
-                        <app-map-country-details [country]="country"></app-map-country-details>
-                    </div>
-                </div>
+
         <div class="card" *ngIf="!!country">
             <div class="card-header card-header-danger">
                 <h4 class="card-title"> {{ country.country }}</h4>
                 <p class="card-category"> Обновлено: {{country.timeUi | date: 'dd/MM/yyyy'}}</p>
             </div>
             <div class="card-body">
+                <div class="row" >
+                    <div class="col-lg-8 col-md-10 ml-auto mr-auto countryMap">
+                        <app-map-country-details [country]="country"></app-map-country-details>
+                    </div>
+                </div>
+                <hr/>
                 <div id="typography">
                     <div class="tim-note" [innerHTML]="country.news">
                     </div>
